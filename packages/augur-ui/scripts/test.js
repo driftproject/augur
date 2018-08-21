@@ -11,7 +11,7 @@ const tests = () =>
     shell.exec(
       `mocha ${process.argv[2] ||
         `"{src/**/*[-\.]test,test/**/*}.js?(x)"`} --timeout 10000 --reporter=min`,
-      { silent: true },
+      { silent: false },
       (code, stdout) => {
         if (code !== 0) {
           console.error(stdout);

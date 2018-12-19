@@ -1803,6 +1803,7 @@
 "@types/puppeteer@*":
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.10.0.tgz#15d5389d6d5ded7bfc0b06287e85655994f8badb"
+  integrity sha512-qrDx+mdV3jj5GYVW9rh8upVt+Hu6xUKerOJE5ko7bSm3aagqKybhwSsQvLqaZJzNs0vbyvtX0wTgs/H/ZvORCA==
   dependencies:
     "@types/node" "*"
 
@@ -7363,10 +7364,10 @@ ejs@^2.5.9, ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
   integrity sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
 
-electron-builder-squirrel-windows@20.38.2:
-  version "20.38.2"
-  resolved "https://registry.yarnpkg.com/electron-builder-squirrel-windows/-/electron-builder-squirrel-windows-20.38.2.tgz#b06af7e0330705069227d4fa6782c3ee52a7c515"
-  integrity sha512-/QmZuueYOdUsWsMx5j0vik5kxeJLir10gF5tnmI67UOVFpmeYMDsi8Ln7WxOe10ZElfMTDtnRIJU0zAltda/TA==
+electron-builder-squirrel-windows@20.38.3:
+  version "20.38.3"
+  resolved "https://registry.yarnpkg.com/electron-builder-squirrel-windows/-/electron-builder-squirrel-windows-20.38.3.tgz#d4ff4ccc6ea1016b24454e4e97c98c3771d4c0aa"
+  integrity sha512-U3AiL8/zC2sJP23p9lJzBJREZHzS1dUbM+X8T5HQo2I0mrVWFjv6aW4Hf5b+naxpn0xquK6JZs/g3Li2dYbbRQ==
   dependencies:
     archiver "^3.0.0"
     bluebird-lst "^1.0.6"

@@ -155,8 +155,7 @@ contract Auction is Initializable, IAuction {
         uint256 _repPriceInAttoEth = getRepSalePriceInAttoEth();
         uint256 _attoEthCost = _attoRepAmount.mul(_repPriceInAttoEth) / 10**18;
         // This will raise an exception if insufficient ETH was sent
-        msg.sender.transfer(msg.value.sub(_attoEthCost));
-        cash.depositEther.value(_attoEthCost)();
+        augur.trustedTransfer(cash, msg.sender, this, _attoEthCost);
         repAuctionToken.mintForPurchaser(msg.sender, _attoEthCost);
         return true;
     }

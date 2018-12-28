@@ -10,7 +10,6 @@ import 'reporting/IDisputeWindow.sol';
 import 'trading/IShareToken.sol';
 import 'reporting/IReportingParticipant.sol';
 import 'reporting/IV2ReputationToken.sol';
-import 'reporting/IMailbox.sol';
 import 'IAugur.sol';
 
 
@@ -32,7 +31,6 @@ contract IMarket is ITyped, IOwnable {
     function getMarketCreatorSettlementFeeDivisor() public view returns (uint256);
     function getForkingMarket() public view returns (IMarket _market);
     function getEndTime() public view returns (uint256);
-    function getMarketCreatorMailbox() public view returns (IMailbox);
     function getWinningPayoutDistributionHash() public view returns (bytes32);
     function getWinningPayoutNumerator(uint256 _outcome) public view returns (uint256);
     function getReputationToken() public view returns (IV2ReputationToken);
@@ -40,6 +38,7 @@ contract IMarket is ITyped, IOwnable {
     function getInitialReporterAddress() public view returns (address);
     function getDesignatedReportingEndTime() public view returns (uint256);
     function deriveMarketCreatorFeeAmount(uint256 _amount) public view returns (uint256);
+    function recordMarketCreatorFees(uint256 _marketCreatorFees) public returns (bool);
     function isContainerForShareToken(IShareToken _shadyTarget) public view returns (bool);
     function isContainerForReportingParticipant(IReportingParticipant _reportingParticipant) public view returns (bool);
     function isInvalid() public view returns (bool);

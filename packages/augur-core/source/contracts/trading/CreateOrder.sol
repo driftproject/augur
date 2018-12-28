@@ -6,13 +6,14 @@ pragma solidity 0.4.24;
 import 'libraries/ReentrancyGuard.sol';
 import 'trading/Order.sol';
 import 'trading/ICreateOrder.sol';
-import 'libraries/CashAutoConverter.sol';
 import 'libraries/Initializable.sol';
+import 'IAugur.sol';
 
 
-contract CreateOrder is CashAutoConverter, Initializable, ReentrancyGuard {
+contract CreateOrder is Initializable, ReentrancyGuard {
     using Order for Order.Data;
 
+    IAugur public augur;
     address public trade;
 
     function initialize(IAugur _augur) public beforeInitialized returns (bool) {
@@ -22,7 +23,7 @@ contract CreateOrder is CashAutoConverter, Initializable, ReentrancyGuard {
         return true;
     }
 
-    function publicCreateOrder(Order.Types _type, uint256 _attoshares, uint256 _price, IMarket _market, uint256 _outcome, bytes32 _betterOrderId, bytes32 _worseOrderId, bytes32 _tradeGroupId, bool _ignoreShares) external payable afterInitialized convertToAndFromCash returns (bytes32) {
+    function publicCreateOrder(Order.Types _type, uint256 _attoshares, uint256 _price, IMarket _market, uint256 _outcome, bytes32 _betterOrderId, bytes32 _worseOrderId, bytes32 _tradeGroupId, bool _ignoreShares) external payable afterInitialized returns (bytes32) {
         bytes32 _result = this.createOrder(msg.sender, _type, _attoshares, _price, _market, _outcome, _betterOrderId, _worseOrderId, _tradeGroupId, _ignoreShares);
         _market.assertBalances();
         return _result;

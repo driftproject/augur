@@ -14,7 +14,8 @@ contract MarketFactory is CloneFactory, IMarketFactory {
         _market = IMarket(createClone(_augur.lookup("Market")));
         IReputationToken _reputationToken = _universe.getReputationToken();
         require(_reputationToken.transfer(_market, _reputationToken.balanceOf(this)));
-        _market.initialize.value(msg.value)(_augur, _universe, _endTime, _feePerEthInWei, _designatedReporterAddress, _sender, _numOutcomes, _numTicks);
+        require(_augur.trustedTransfer(ICash(_augur.lookup("Cash")), _sender, _market, _universe.getOrCacheValidityBond()));
+        _market.initialize(_augur, _universe, _endTime, _feePerEthInWei, _designatedReporterAddress, _sender, _numOutcomes, _numTicks);
         return _market;
     }
 }

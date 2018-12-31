@@ -20,6 +20,7 @@ import 'libraries/math/SafeMathUint256.sol';
 import 'libraries/math/SafeMathInt256.sol';
 import 'reporting/Reporting.sol';
 import 'reporting/IInitialReporter.sol';
+import 'reporting/IAuction.sol';
 
 
 contract Market is ITyped, Initializable, Ownable, IMarket {
@@ -267,7 +268,9 @@ contract Market is ITyped, Initializable, Ownable, IMarket {
         if (!isInvalid()) {
             cash.transfer(owner, _bondAndFees);
         } else {
+            IAuction _auction = universe.getAuction();
             cash.transfer(universe.getAuction(), _bondAndFees);
+            _auction.recordFees(_bondAndFees);
         }
         return true;
     }

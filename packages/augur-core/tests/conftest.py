@@ -421,7 +421,8 @@ class ContractsFixture:
 
     def createYesNoMarket(self, universe, endTime, feePerEthInWei, designatedReporterAddress, sender=tester.k0, topic="", description="description", extraInfo="", validityBond=0):
         marketCreationFee = validityBond or universe.getOrCacheMarketCreationCost()
-        marketAddress = universe.createYesNoMarket(endTime, feePerEthInWei, designatedReporterAddress, topic, description, extraInfo, value = marketCreationFee, sender=sender)
+        self.contracts['Cash'].depositEther(value = marketCreationFee, sender = sender)
+        marketAddress = universe.createYesNoMarket(endTime, feePerEthInWei, designatedReporterAddress, topic, description, extraInfo, sender=sender)
         assert marketAddress
         market = ABIContract(self.chain, ContractTranslator(ContractsFixture.signatures['Market']), marketAddress)
         return market
@@ -429,14 +430,16 @@ class ContractsFixture:
     def createCategoricalMarket(self, universe, numOutcomes, endTime, feePerEthInWei, designatedReporterAddress, sender=tester.k0, topic="", description="description", extraInfo=""):
         marketCreationFee = universe.getOrCacheMarketCreationCost()
         outcomes = [" "] * numOutcomes
-        marketAddress = universe.createCategoricalMarket(endTime, feePerEthInWei, designatedReporterAddress, outcomes, topic, description, extraInfo, value = marketCreationFee, sender=sender)
+        self.contracts['Cash'].depositEther(value = marketCreationFee, sender = sender)
+        marketAddress = universe.createCategoricalMarket(endTime, feePerEthInWei, designatedReporterAddress, outcomes, topic, description, extraInfo, sender=sender)
         assert marketAddress
         market = ABIContract(self.chain, ContractTranslator(ContractsFixture.signatures['Market']), marketAddress)
         return market
 
     def createScalarMarket(self, universe, endTime, feePerEthInWei, maxPrice, minPrice, numTicks, designatedReporterAddress, sender=tester.k0, description="description", extraInfo=""):
         marketCreationFee = universe.getOrCacheMarketCreationCost()
-        marketAddress = universe.createScalarMarket(endTime, feePerEthInWei, designatedReporterAddress, minPrice, maxPrice, numTicks, "", description, extraInfo, value = marketCreationFee, sender=sender)
+        self.contracts['Cash'].depositEther(value = marketCreationFee, sender = sender)
+        marketAddress = universe.createScalarMarket(endTime, feePerEthInWei, designatedReporterAddress, minPrice, maxPrice, numTicks, "", description, extraInfo, sender=sender)
         assert marketAddress
         market = ABIContract(self.chain, ContractTranslator(ContractsFixture.signatures['Market']), marketAddress)
         return market
